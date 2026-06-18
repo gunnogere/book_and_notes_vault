@@ -339,6 +339,7 @@ Generative AI tools were used as productivity aids for documentation, testing su
 | ------------ | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `README.md`  | Project documentation, architecture overview, feature descriptions, and repository presentation | https://chatgpt.com/c/6a340384-cc80-83ea-ab3c-a5eb2a7c974a |
 | `tests.html` | Test suite structure, validation scenarios, and testing workflow generation                     | https://chatgpt.com/c/6a3403be-c638-83ea-8e0b-036b32b9edf7 |
+| `seed.json`  | Generation of book records for initial application data (from book_0005 onwards).               | https://chatgpt.com/c/6a344027-fed8-83ea-8fb6-40d977b9cf34 |
 
 ### Disclaimer
 
