@@ -27,14 +27,24 @@ export const addInitialBookRecord = (bookData) => {
     // Load existing array list using your schema guide
     const books = load();
 
-    // Requirement: If book already exists by "title", update the record
-    const existingIndex = books.findIndex(b => 
-        b.title.trim().toLowerCase() === bookData.title.trim().toLowerCase()
-    );
+    let existingIndex = -1;
+
+    // Priority 1: Match by ID (for explicit edits)
+    if (bookData.id) {
+        existingIndex = books.findIndex(b => b.id === bookData.id);
+    }
+
+    // Priority 2: Match by title (duplicate prevention / implicit updates)
+    if (existingIndex === -1) {
+        existingIndex = books.findIndex(b => 
+            b.title.trim().toLowerCase() === bookData.title.trim().toLowerCase()
+        );
+    }
 
     if (existingIndex > -1) {
         const updatedBook = {
             ...books[existingIndex],
+            title: bookData.title,
             author: bookData.author,
             pages: parseInt(bookData.pages, 10),
             tag: bookData.tag,

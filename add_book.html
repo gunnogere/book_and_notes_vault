@@ -18,7 +18,7 @@
         <a href="index.html" class="site-logo">
             <img class="logo_image" src="assets/images/logo.jpg" alt="Logo">
             <h1 class="logo-text">
-                Gunnogere University -  Book & Notes Vault
+                Joshua's Book & Notes Vault
             </h1>
         </a>
 
@@ -43,6 +43,14 @@
         <div class="container">
             <!-- Accessible container for status messages -->
             <div id="message-container" aria-live="polite"></div>
+
+            <div class="import-section" style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border);">
+                <h3>Bulk Import</h3>
+                <div class="form-group">
+                    <label for="import-json">Upload Records File (.json)</label>
+                    <input type="file" id="import-json" accept=".json">
+                </div>
+            </div>
 
             <h2>Add Book</h2>
             <form id="book-form" novalidate>

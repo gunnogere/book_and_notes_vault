@@ -5,11 +5,12 @@
  */
 
 // CRITICAL: Import the storage function from your module file
-import { addInitialBookRecord } from './storage.js';
+import { addInitialBookRecord, load } from './storage.js';
 import { showMessage } from './app.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('book-form');
+    const importInput = document.getElementById('import-json');
     
     // Form Input Elements
     const fields = {
@@ -29,6 +30,28 @@ document.addEventListener('DOMContentLoaded', () => {
         tag: /^[A-Za-z-]+(?:,[A-Za-z-]+)*$/, // Letters, hyphens, comma-separated (no spaces)
         duplicateCheck: /\b(\w+)\s+\1\b/i // Advanced look: Catch duplicate words (case-insensitive)
     };
+
+    // Handle Edit Mode from URL Parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const editId = urlParams.get('edit');
+
+    if (editId) {
+        const books = load();
+        const bookToEdit = books.find(b => b.id === editId);
+
+        if (bookToEdit) {
+            fields.id.value = bookToEdit.id;
+            fields.title.value = bookToEdit.title;
+            fields.author.value = bookToEdit.author;
+            fields.pages.value = bookToEdit.pages;
+            fields.tag.value = bookToEdit.tag;
+            fields.dateAdded.value = bookToEdit.dateAdded;
+
+            // Update UI for Edit Mode
+            document.querySelector('h2').textContent = 'Edit Book';
+            document.getElementById('save-btn').textContent = 'Update Book';
+        }
+    }
 
     // Error message helpers
     const clearErrors = () => {
@@ -120,5 +143,41 @@ document.addEventListener('DOMContentLoaded', () => {
             // Fail-safe handling
             showMessage('Failure: An error occurred while trying to save the book.', 'error', 'message-container');
         }
+    });
+
+    // Handle Bulk Import
+    importInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Enforce .json only type requirement
+        if (!file.name.toLowerCase().endsWith('.json')) {
+            showMessage('Invalid file type. Only .json files are allowed.', 'error', 'message-container');
+            importInput.value = '';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const data = JSON.parse(event.target.result);
+                const booksArray = Array.isArray(data) ? data : [data];
+                
+                let added = 0;
+                let updated = 0;
+
+                booksArray.forEach(book => {
+                    const result = addInitialBookRecord(book);
+                    if (result.wasUpdated) updated++;
+                    else added++;
+                });
+
+                showMessage(`Import successful: ${added} added, ${updated} updated.`, 'success', 'message-container');
+            } catch (err) {
+                showMessage('Failed to parse JSON. Ensure the file format is correct.', 'error', 'message-container');
+            }
+            importInput.value = ''; // Reset input to allow re-uploading same file
+        };
+        reader.readAsText(file);
     });
 });

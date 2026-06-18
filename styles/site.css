@@ -204,6 +204,21 @@ border-radius: var(--radius);
 transition: transform var(--transition);
 }
 
+.tag-badge {
+    display: inline-block;
+    background-color: var(--secondary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.tags-container {
+    margin-top: 8px;
+}
+
 .stat-card:hover {
 transform: translateY(-4px);
 }
@@ -217,7 +232,7 @@ font-weight: bold;
 margin-top: 32px;
 }
 
-.trend-chart {
+.latest_books {
 min-height: 140px;
 border: 1px solid var(--border);
 border-radius: var(--radius);
@@ -388,11 +403,11 @@ color: var(--muted);
 
     .stats-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .settings-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .search-panel {

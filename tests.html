@@ -28,10 +28,10 @@
             if (condition) {
                 passed++;
                 div.className = 'pass';
-                div.textContent = `✓ PASS: ${message}`;
+                div.textContent = `PASS: ${message}`;
             } else {
                 div.className = 'fail';
-                div.textContent = `✗ FAIL: ${message}`;
+                div.textContent = `FAIL: ${message}`;
             }
             resultsDiv.appendChild(div);
         }
