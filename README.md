@@ -6,11 +6,25 @@
 
 ---
 
+
 ## Project Overview
 
 Joshua's Book & Notes Vault is a privacy-focused, modular personal library manager designed to help users organize books, notes, and reading progress in a distraction-free environment.
 
 Built with a mobile-first philosophy, the application emphasizes simplicity, accessibility, and performance while maintaining a clean and responsive user experience. 
+
+## Explainer Video
+Explainer Video (2 mins) : https://www.youtube.com/watch?v=e7DQbrV2hZQ
+
+
+## App Pages
+Dashboard and ABout: https://github.com/gunnogere/book_and_notes_vault/blob/main/index.html
+Add Book: https://github.com/gunnogere/book_and_notes_vault/blob/main/add_book.html
+Records: https://github.com/gunnogere/book_and_notes_vault/blob/main/records.html
+Settings: https://github.com/gunnogere/book_and_notes_vault/blob/main/settings.html
+Tests: https://github.com/gunnogere/book_and_notes_vault/blob/main/tests.html
+Seed Data: https://github.com/gunnogere/book_and_notes_vault/blob/main/seed.json
+ReadME: https://github.com/gunnogere/book_and_notes_vault/blob/main/README.md 
 
 ### 🛠 Technology Stack
 
