@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * Exports filtered results as a JSON file.
+     * Exports only the fliters results as a JSON file downloaded to the user's device
      */
     const handleExport = () => {
         if (filteredRecords.length === 0) return;
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadAnchorNode.setAttribute("download", "books_vault_export_by_joshua.json");
         document.body.appendChild(downloadAnchorNode);
         downloadAnchorNode.click();
-        downloadAnchorNode.remove();
+        downloadAnchorNode.remove(); 
     };
 
     // Event Listeners
