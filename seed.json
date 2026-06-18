@@ -1,0 +1,48 @@
+[
+  {
+  "id": "rec_0001",
+  "title": "Atomic Habits",
+  "author": "James Clear",
+  "pages": 320,
+  "tag": "Self-Help,Productivity",
+  "dateAdded": "2025-09-29", 
+  "updatedAt": "2025-09-29T10:15:00.000Z"
+},
+
+{
+    "id": "rec_0002",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "pages": 208,
+    "tag": "Fiction,Classic",
+    "dateAdded": "2025-09-29", 
+    "updatedAt": "2025-09-29T10:15:00.000Z"
+}, 
+{
+    "id": "rec_0003",
+    "title": "The 7 Habits of Highly Effective People",
+    "author": "Stephen R. Covey",
+    "pages":  230,
+    "tag": "Self-Help,Business",
+    "dateAdded": "2025-09-29", 
+    "updatedAt": "2025-09-29T10:15:00.000Z" 
+}, 
+{
+    "id": "rec_0004",
+    "title": "The Purpose Driven Church",
+    "author": "Rick Warrren",
+    "pages": 233,
+    "tag": "Self-Help,Growth",
+    "dateAdded": "2025-09-29",          
+    "updatedAt": "2025-09-29T10:15:00.000Z"
+},
+{
+    "id": "rec_0005",
+    "title": "The 10X Rule",
+    "author": "",
+    "pages": 23,
+    "tag": "Self-Help,Motivation",
+    "dateAdded": "2025-09-29", 
+    "updatedAt": "2025-09-29T10:15:00.000Z"
+  }
+]

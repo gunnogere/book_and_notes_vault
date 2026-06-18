@@ -21,3 +21,19 @@ themeToggle.addEventListener('click', () => {
         themeToggle.textContent = '☀️'; // Update icon to sun
     }
 });
+
+
+export function showMessage(message, type = 'info', id) {
+    const messageContainer = document.getElementById(id || 'message-container');
+    if (!messageContainer) return;
+
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', type);
+    messageElement.textContent = message;
+    messageContainer.appendChild(messageElement);
+
+    setTimeout(() => {
+        messageContainer.removeChild(messageElement);
+    }, 3000);
+
+}

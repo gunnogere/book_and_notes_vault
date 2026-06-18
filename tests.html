@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit Tests - Book & Notes Vault</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; background: #f4f4f9; }
+        h1 { color: #221f4d; border-bottom: 2px solid #221f4d; padding-bottom: 10px; }
+        h2 { color: #5cb77a; margin-top: 30px; }
+        .pass { color: #2e7d32; padding: 4px 0; }
+        .fail { color: #c62828; font-weight: bold; background: #ffebee; padding: 4px 8px; border-radius: 4px; }
+        .summary { margin-top: 40px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <h1>Add Book Form - Validation Tests</h1>
+    <div id="test-results"></div>
+    <div class="summary" id="summary"></div>
+
+    <script type="module">
+        const resultsDiv = document.getElementById('test-results');
+        let passed = 0;
+        let total = 0;
+
+        function assert(condition, message) {
+            total++;
+            const div = document.createElement('div');
+            if (condition) {
+                passed++;
+                div.className = 'pass';
+                div.textContent = `✓ PASS: ${message}`;
+            } else {
+                div.className = 'fail';
+                div.textContent = `✗ FAIL: ${message}`;
+            }
+            resultsDiv.appendChild(div);
+        }
+
+        function describe(name, fn) {
+            const header = document.createElement('h2');
+            header.textContent = name;
+            resultsDiv.appendChild(header);
+            fn();
+        }
+
+        // Regex patterns defined in add_book.js
+        const patterns = {
+            text: /^\S(?:.*\S)?$/, 
+            numeric: /^(0|[1-9]\d*)(\.\d{1,2})?$/, 
+            date: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, 
+            tag: /^[A-Za-z-]+(?:,[A-Za-z-]+)*$/, 
+            duplicateCheck: /\b(\w+)\s+\1\b/i 
+        };
+
+        describe('1. Text Validation (Title/Author)', () => {
+            assert(patterns.text.test('Atomic Habits'), 'Should accept normal strings');
+            assert(!patterns.text.test(' Leading Space'), 'Should reject leading spaces');
+            assert(!patterns.text.test('Trailing Space '), 'Should reject trailing spaces');
+            assert(!patterns.text.test(' '), 'Should reject single whitespace');
+        });
+
+        describe('2. Duplicate Word Detection', () => {
+            assert(patterns.duplicateCheck.test('The The'), 'Should detect "The The"');
+            assert(patterns.duplicateCheck.test('habits habits'), 'Should detect duplicate words regardless of case');
+            assert(!patterns.duplicateCheck.test('Atomic Habits'), 'Should pass distinct words');
+        });
+
+        describe('3. Numeric Validation (Pages)', () => {
+            assert(patterns.numeric.test('320'), 'Should accept valid page numbers');
+            assert(patterns.numeric.test('1.5'), 'Should accept decimals (for conversion units)');
+            assert(!patterns.numeric.test('-5'), 'Should reject negative values');
+            assert(!patterns.numeric.test('abc'), 'Should reject non-numeric input');
+        });
+
+        describe('4. Tag Validation (Comma-separated, no spaces)', () => {
+            assert(patterns.tag.test('Self-Help'), 'Should accept single tag');
+            assert(patterns.tag.test('Self-Help,Fiction,Classic'), 'Should accept multiple tags separated by commas');
+            assert(!patterns.tag.test('Self-Help, Fiction'), 'Should reject spaces after commas');
+            assert(!patterns.tag.test('Self Help'), 'Should reject spaces within tags');
+        });
+
+        describe('5. Date Validation (YYYY-MM-DD)', () => {
+            assert(patterns.date.test('2026-06-18'), 'Should accept valid ISO date format');
+            assert(!patterns.date.test('18/06/2026'), 'Should reject slash-separated date');
+            assert(!patterns.date.test('2026-13-01'), 'Should reject invalid month (13)');
+        });
+
+        const summary = document.getElementById('summary');
+        summary.innerHTML = `<strong>Final Results:</strong> ${passed} / ${total} tests passed.`;
+        if (passed === total) summary.style.borderLeft = "5px solid #2e7d32";
+        else summary.style.borderLeft = "5px solid #c62828";
+    </script>
+</body>
+</html>
