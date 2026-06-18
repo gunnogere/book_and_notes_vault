@@ -18,13 +18,13 @@ Explainer Video (2 mins) : https://www.youtube.com/watch?v=e7DQbrV2hZQ
 
 
 ## App Pages
-Dashboard and ABout: https://github.com/gunnogere/book_and_notes_vault/blob/main/index.html
-Add Book: https://github.com/gunnogere/book_and_notes_vault/blob/main/add_book.html
-Records: https://github.com/gunnogere/book_and_notes_vault/blob/main/records.html
-Settings: https://github.com/gunnogere/book_and_notes_vault/blob/main/settings.html
-Tests: https://github.com/gunnogere/book_and_notes_vault/blob/main/tests.html
-Seed Data: https://github.com/gunnogere/book_and_notes_vault/blob/main/seed.json
-ReadME: https://github.com/gunnogere/book_and_notes_vault/blob/main/README.md 
+Dashboard and About: https://github.com/gunnogere/book_and_notes_vault/blob/main/index.html  
+Add Book: https://github.com/gunnogere/book_and_notes_vault/blob/main/add_book.html  
+Records: https://github.com/gunnogere/book_and_notes_vault/blob/main/records.html  
+Settings: https://github.com/gunnogere/book_and_notes_vault/blob/main/settings.html  
+Tests: https://github.com/gunnogere/book_and_notes_vault/blob/main/tests.html  
+Seed Data: https://github.com/gunnogere/book_and_notes_vault/blob/main/seed.json  
+README: https://github.com/gunnogere/book_and_notes_vault/blob/main/README.md  
 
 ### 🛠 Technology Stack
 
