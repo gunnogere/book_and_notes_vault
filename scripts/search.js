@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${book.dateAdded}</td>
                 <td>
                     <button class="btn-small" onclick="window.location.href='add_book.html?edit=${book.id}'">Edit</button>
-                    <button class="btn-small btn-delete" data-id="${book.id}">Delete</button>
+                    <button id="btn_delete" class="btn-small btn-delete" data-id="${book.id}">Delete</button>
                 </td>
             `;
             tableBody.appendChild(tr);
@@ -173,9 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleExport = () => {
         if (filteredRecords.length === 0) return;
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(filteredRecords, null, 2));
+        const now = new Date();
+        const timestamp = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
+        const filename = `books_vault_export_by_joshua_${timestamp}.json`;
         const downloadAnchorNode = document.createElement('a');
         downloadAnchorNode.setAttribute("href", dataStr);
-        downloadAnchorNode.setAttribute("download", "books_vault_export_by_joshua.json");
+        downloadAnchorNode.setAttribute("download", filename);
         document.body.appendChild(downloadAnchorNode);
         downloadAnchorNode.click();
         downloadAnchorNode.remove(); 
@@ -201,4 +204,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial Load
     handleSort();
+
+    // Refresh records if data is seeded after the initial render
+    window.addEventListener('data-seeded', () => {
+        console.log('Data seeded, refreshing records table...');
+        allRecords = load();
+        filteredRecords = [...allRecords];
+        handleSort();
+    });
 });

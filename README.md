@@ -181,7 +181,7 @@ Example application record:
 ```json
 [
   {
-    "id": "rec_0001",
+    "id": "book_0001",
     "title": "How to Code - Intro for firsttimers",
     "author": "Joshua Mulongo",
     "pages": 23,

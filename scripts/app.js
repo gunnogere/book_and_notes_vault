@@ -1,4 +1,4 @@
-import { load, loadSetting } from './storage.js';
+import { load, loadSetting, save, KEY } from './storage.js';
 
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
@@ -35,16 +35,48 @@ export function showMessage(message, type = 'info', id) {
     messageContainer.appendChild(messageElement);
 
     setTimeout(() => {
-        messageContainer.removeChild(messageElement);
+        if (messageElement.parentNode === messageContainer) {
+            messageContainer.removeChild(messageElement);
+        }
     }, 3000);
-
 }
 
 /**
- * Initialize dashboard components by rendering stats and the latest 5 records.
- * This function is now responsible for all dashboard-related rendering.
+ * Checks if seed data exists in localStorage. If not, fetches and loads it.
  */
-document.addEventListener('DOMContentLoaded', () => {
+async function initializeSeedData() {
+    if (localStorage.getItem(KEY) === null || localStorage.getItem(KEY) === '[]') {
+        console.log('No data found in localStorage. Loading seed data...');
+        try {
+            const response = await fetch('seed.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const seedData = await response.json();
+            // Ensure createdAt and updatedAt are set for seed data if not present
+            const now = new Date().toISOString();
+            const processedSeedData = seedData.map(book => ({
+                ...book,
+                createdAt: book.createdAt || now,
+                updatedAt: book.updatedAt || now
+            }));
+            save(processedSeedData);
+            console.log('Seed data loaded successfully.');
+
+            // Notify other scripts that data has been seeded
+            window.dispatchEvent(new CustomEvent('data-seeded'));
+        } catch (error) {
+            console.error('Failed to load seed data:', error);
+        }
+    } else {
+        console.log('Data already exists in localStorage. Skipping seed data load.');
+    }
+}
+
+/**
+ * Renders the dashboard components.
+ */
+function renderDashboard() {
     const latestContainer = document.getElementById('latest_books');
     if (!latestContainer) return; // Only run if on the dashboard page
 
@@ -89,6 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>`;
         }).join('')
         : '<p>No books added yet.</p>';
- 
- 
+}
+
+/**
+ * Main initialization on page load.
+ */
+document.addEventListener('DOMContentLoaded', async () => {
+    await initializeSeedData();
+    renderDashboard();
 });

@@ -3,7 +3,7 @@
  * Updated: 2026-06-18
  */
 
-const KEY = 'app:data';
+export const KEY = 'app:data';
 
 /**
  * Loads and parses the current list of items from localStorage.
@@ -87,11 +87,11 @@ export const addInitialBookRecord = (bookData) => {
         return { record: updatedBook, wasUpdated: true };
     }
 
-    // ID Generation: e.g., rec_0001
+    // ID Generation: e.g., book_0001
     const nextIdNumber = books.length > 0 
-        ? Math.max(...books.map(b => parseInt(b.id.replace('rec_', ''), 10))) + 1 
+        ? Math.max(...books.map(b => parseInt(b.id.replace('book_', ''), 10))) + 1 
         : 1;
-    const newId = `rec_${String(nextIdNumber).padStart(4, '0')}`;
+    const newId = `book_${String(nextIdNumber).padStart(4, '0')}`;
 
     const newBook = {
         id: newId,

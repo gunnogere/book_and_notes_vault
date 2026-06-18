@@ -286,6 +286,16 @@ button:active {
 transform: scale(0.98);
 }
 
+.btn-small {
+margin: 8px 12px;
+font-size: 14px;
+width: auto;
+}
+#btn_delete{
+    background: var(--error);
+    color: white;
+}
+
 .error-message {
 display: block;
 color: var(--error);
@@ -439,3 +449,4 @@ color: var(--muted);
         display: block;
     }
 }
+

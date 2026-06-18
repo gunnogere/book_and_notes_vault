@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const editId = urlParams.get('edit');
 
-    if (editId) {
+    const loadBookForEditing = () => {
+        if (!editId) return;
+        
         const books = load();
         const bookToEdit = books.find(b => b.id === editId);
 
@@ -51,7 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('h2').textContent = 'Edit Book';
             document.getElementById('save-btn').textContent = 'Update Book';
         }
-    }
+    };
+
+    loadBookForEditing();
+
+    // Re-check for edit data if it was seeded after the script ran
+    window.addEventListener('data-seeded', () => {
+        if (editId && !fields.id.value) {
+            loadBookForEditing();
+        }
+    });
 
     // Error message helpers
     const clearErrors = () => {
