@@ -11,6 +11,33 @@ import { showMessage } from './app.js';
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('book-form');
     const importInput = document.getElementById('import-json');
+    const bulkProcessBtn = document.getElementById('bulk-process-btn');
+    
+    // Tab Switching Logic
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panes = document.querySelectorAll('.tab-pane');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.dataset.tab;
+            
+            // Update buttons
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                t.style.borderBottom = 'none';
+                t.style.fontWeight = 'normal';
+                t.style.color = 'var(--muted)';
+            });
+            tab.classList.add('active');
+            tab.style.borderBottom = '2px solid var(--primary)';
+            tab.style.fontWeight = 'bold';
+            tab.style.color = 'var(--text)';
+
+            // Update panes
+            panes.forEach(p => p.style.display = 'none');
+            document.getElementById(`${target}-pane`).style.display = 'block';
+        });
+    });
     
     // Form Input Elements
     const fields = {
@@ -160,12 +187,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Handle Bulk Import
-    importInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+    /**
+     * Processes the selected file for bulk import.
+     */
+    const processBulkFile = (file) => {
+        if (!file) {
+            showMessage('Please select a JSON file first.', 'info', 'message-container');
+            return;
+        }
 
-        // Enforce .json only type requirement
         if (!file.name.toLowerCase().endsWith('.json')) {
             showMessage('Invalid file type. Only .json files are allowed.', 'error', 'message-container');
             importInput.value = '';
@@ -194,5 +224,12 @@ document.addEventListener('DOMContentLoaded', () => {
             importInput.value = ''; // Reset input to allow re-uploading same file
         };
         reader.readAsText(file);
-    }); 
+    };
+
+    // Handle Bulk Import Button Click
+    if (bulkProcessBtn) {
+        bulkProcessBtn.addEventListener('click', () => {
+            processBulkFile(importInput.files[0]);
+        });
+    }
 });

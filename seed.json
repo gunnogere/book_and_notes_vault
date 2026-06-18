@@ -4,7 +4,16 @@
     "title": "How to Code - Intro for firsttimers",
     "author": "Joshua Mulongo",
     "pages": 23,
-    "tag": "firsttimercoder newbieDev",
+    "tag": "firsttimercoder,newbieDev",
+    "dateAdded": "2026-06-17",
+    "updatedAt": "2026-06-18T15:18:23.887Z"
+  },
+  {
+    "id": "book_0002",
+    "title": "How to Understand Women",
+    "author": "Broke Guy",
+    "pages": 1,
+    "tag": "Humor,Relationships",
     "dateAdded": "2026-06-17",
     "updatedAt": "2026-06-18T15:18:23.887Z"
   },
@@ -13,27 +22,107 @@
     "title": "How to cook Matooke",
     "author": "Joshua Mulongo",
     "pages": 10,
-    "tag": "cooking,africandishes",
+    "tag": "Cooking,African-Dishes",
     "dateAdded": "2026-06-03",
     "updatedAt": "2026-06-18T15:18:23.888Z"
   },
   {
-    "id": "book_0002",
-    "title": "How to Understand Women",
-    "author": "Broke Guy",
-    "pages": 1,
-    "tag": "women",
-    "dateAdded": "2026-06-17",
-    "updatedAt": "2026-06-18T15:18:23.887Z"
+    "id": "book_0004",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "pages": 320,
+    "tag": "Self-Help,Productivity",
+    "dateAdded": "2025-09-29",
+    "updatedAt": "2025-09-29T10:15:00.000Z"
   },
   {
-  "id": "book_0001",
-  "title": "Atomic Habits",
-  "author": "James Clear",
-  "pages": 320,
-  "tag": "Self-Help,Productivity",
-  "dateAdded": "2025-09-29", 
-  "updatedAt": "2025-09-29T10:15:00.000Z"
-}
-
+    "id": "book_0005",
+    "title": "The Purpose Driven Life",
+    "author": "Rick Warren",
+    "pages": 336,
+    "tag": "Christian,Spirituality",
+    "dateAdded": "2026-01-10",
+    "updatedAt": "2026-01-10T09:00:00.000Z"
+  },
+  {
+    "id": "book_0006",
+    "title": "Mere Christianity",
+    "author": "C.S. Lewis",
+    "pages": 227,
+    "tag": "Christian,Theology",
+    "dateAdded": "2026-01-15",
+    "updatedAt": "2026-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "book_0007",
+    "title": "Salt Fat Acid Heat",
+    "author": "Samin Nosrat",
+    "pages": 480,
+    "tag": "Cooking,Food",
+    "dateAdded": "2026-02-20",
+    "updatedAt": "2026-02-20T11:00:00.000Z"
+  },
+  {
+    "id": "book_0008",
+    "title": "Kitchen Confidential",
+    "author": "Anthony Bourdain",
+    "pages": 352,
+    "tag": "Food,Biography",
+    "dateAdded": "2026-03-05",
+    "updatedAt": "2026-03-05T12:00:00.000Z"
+  },
+  {
+    "id": "book_0009",
+    "title": "Top Gear: The Cool 500",
+    "author": "Matt Master",
+    "pages": 312,
+    "tag": "Cars,Automotive",
+    "dateAdded": "2026-03-12",
+    "updatedAt": "2026-03-12T13:00:00.000Z"
+  },
+  {
+    "id": "book_0010",
+    "title": "The Art of the Automobile",
+    "author": "Dennis Adler",
+    "pages": 256,
+    "tag": "Cars,History",
+    "dateAdded": "2026-04-01",
+    "updatedAt": "2026-04-01T14:00:00.000Z"
+  },
+  {
+    "id": "book_0011",
+    "title": "Wired - AI Revolution",
+    "author": "Conde Nast",
+    "pages": 120,
+    "tag": "Tech,Magazine",
+    "dateAdded": "2026-04-15",
+    "updatedAt": "2026-04-15T15:00:00.000Z"
+  },
+  {
+    "id": "book_0012",
+    "title": "MIT Technology Review",
+    "author": "MIT Press",
+    "pages": 98,
+    "tag": "Tech,Publication",
+    "dateAdded": "2026-05-01",
+    "updatedAt": "2026-05-01T16:00:00.000Z"
+  },
+  {
+    "id": "book_0013",
+    "title": "Scientific American",
+    "author": "Springer Nature",
+    "pages": 110,
+    "tag": "Science,Publication",
+    "dateAdded": "2026-05-15",
+    "updatedAt": "2026-05-15T17:00:00.000Z"
+  },
+  {
+    "id": "book_0014",
+    "title": "National Geographic",
+    "author": "Disney Partners",
+    "pages": 140,
+    "tag": "Geography,Publication",
+    "dateAdded": "2026-06-01",
+    "updatedAt": "2026-06-01T18:00:00.000Z"
+  }
 ]

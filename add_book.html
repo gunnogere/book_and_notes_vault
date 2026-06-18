@@ -44,52 +44,68 @@
             <!-- Accessible container for status messages -->
             <div id="message-container" aria-live="polite"></div>
 
-            <div class="import-section" style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border);">
-                <h3>Bulk Import</h3>
-                <div class="form-group">
-                    <label for="import-json">Upload Records File (.json)</label>
-                    <input type="file" id="import-json" accept=".json">
-                </div>
+            <!-- TABS NAVIGATION -->
+            <div class="tabs-nav" style="display: flex; gap: 10px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <button type="button" class="tab-btn active" data-tab="single" style="background: none; border: none; padding: 10px 20px; cursor: pointer; border-bottom: 2px solid var(--primary); font-weight: bold; color: var(--text);">Enter SIngle Record</button>
+                <button type="button" class="tab-btn" data-tab="bulk" style="background: none; border: none; padding: 10px 20px; cursor: pointer; color: var(--muted);">Bulk Upload / Update</button>
             </div>
 
-            <h2>Add Book</h2>
-            <form id="book-form" novalidate>
-                <input type="hidden" id="record-id">
-                
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" required>
-                    <small class="error-message" id="title-error"></small>
-                </div>
+            <!-- SINGLE ENTRY PANE -->
+            <div id="single-pane" class="tab-pane">
+                <h2>Add Book</h2>
+                <form id="book-form" novalidate>
+                    <input type="hidden" id="record-id">
+                    
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" required>
+                        <small class="error-message" id="title-error"></small>
+                    </div>
 
-                <div class="form-group">
-                    <label for="author">Author</label>
-                    <input type="text" id="author" required>
-                    <small class="error-message" id="author-error"></small>
-                </div>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" id="author" required>
+                        <small class="error-message" id="author-error"></small>
+                    </div>
 
-                <div class="form-group">
-                    <label for="pages">Pages</label>
-                    <input type="number" id="pages" min="1" required>
-                    <small class="error-message" id="pages-error"></small>
-                </div>
+                    <div class="form-group">
+                        <label for="pages">Pages</label>
+                        <input type="number" id="pages" min="1" required>
+                        <small class="error-message" id="pages-error"></small>
+                    </div>
 
-                <div class="form-group">
-                    <label for="tag">Tag</label>
-                    <input type="text" id="tag" required>
-                    <small class="error-message" id="tag-error"></small>
-                </div>
+                    <div class="form-group">
+                        <label for="tag">Tag</label>
+                        <input type="text" id="tag" required>
+                        <small class="error-message" id="tag-error"></small>
+                    </div>
 
-                <div class="form-group">
-                    <label for="date-added">Date Added</label>
-                    <input type="date" id="date-added" required>
-                    <small class="error-message" id="date-error"></small>
-                </div>
+                    <div class="form-group">
+                        <label for="date-added">Date Added</label>
+                        <input type="date" id="date-added" required>
+                        <small class="error-message" id="date-error"></small>
+                    </div>
 
-                <button type="submit" id="save-btn">
-                    Save Book
-                </button>
-            </form>
+                    <button type="submit" id="save-btn">
+                        Save Book
+                    </button>
+                </form>
+            </div>
+
+            <!-- BULK UPLOAD PANE -->
+            <div id="bulk-pane" class="tab-pane" style="display: none;">
+                <div class="import-section" style="border: 2px solid var(--border); padding: 30px; border-radius: 8px; background: var(--card-bg);">
+                    <h3>Bulk Management</h3>
+                    <p style="margin-bottom: 20px; color: var(--muted);">Upload a JSON file containing multiple book records to add or update your library in bulk.</p>
+                    <div style="display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap;">
+                        <div class="form-group" style="flex: 1; min-width: 250px; margin-bottom: 0;">
+                            <label for="import-json">Upload Records File (.json)</label>
+                            <input type="file" id="import-json" accept=".json" style="width: 100%;">
+                        </div>
+                        <button type="button" id="bulk-process-btn" class="btn" style="height: 44px; padding: 0 24px;">Process File</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </main>

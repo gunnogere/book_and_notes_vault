@@ -65,10 +65,11 @@ export const addInitialBookRecord = (bookData) => {
         existingIndex = books.findIndex(b => b.id === bookData.id);
     }
 
-    // Priority 2: Match by title (duplicate prevention / implicit updates)
+    // Priority 2: Match by title AND author (composite key duplicate prevention)
     if (existingIndex === -1) {
         existingIndex = books.findIndex(b => 
-            b.title.trim().toLowerCase() === bookData.title.trim().toLowerCase()
+            b.title.trim().toLowerCase() === bookData.title.trim().toLowerCase() &&
+            b.author.trim().toLowerCase() === bookData.author.trim().toLowerCase()
         );
     }
 
