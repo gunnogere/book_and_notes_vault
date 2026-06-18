@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book & Notes Vault</title>
+
+<link rel="stylesheet" href="styles/site.css">
+
+</head>
+<body>
+
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="container">
+
+
+        <a href="index.html" class="site-logo">
+            <img class="logo_image" src="assets/images/logo.jpg" alt="Logo">
+            <h1 class="logo-text">
+                Gunnogere University -  Book & Notes Vault
+            </h1>
+        </a>
+
+        <nav aria-label="Primary Navigation">
+            <ul class="nav-links">
+                <li><a href="index.html">About</a></li> 
+                <li><a href="index.html#dashboard">Dashboard</a></li>
+                <li><a href="records.html">Records</a></li> 
+                <li><a href="add_book.html">Add Book</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle" aria-label="Toggle Dark Mode">🌓</button>
+
+    </div>
+</header>
+
+<!-- MAIN -->
+<main id="main-content">
+ 
+ 
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="section-card">
+
+        <div class="container">
+
+            <h2>Welcome to Book & Notes Vault</h2>
+
+            <p>
+               Hello Student, Welcome to the Book & Notes Vault, your personal library manager. 
+               Here you can find your book records, add new books. Use the navigation links above to explore the features of the vault.
+            </p>
+
+             <h2>About</h2>
+
+            <p>
+                Book & Notes Vault is a lightweight personal library
+                manager for organizing books, tracking reading progress,
+                and exploring records through regex-powered search.
+            </p>
+
+            <div class="contact-info">
+
+                <p>
+                    GitHub:
+                    <a href="https://github.com/gunnogere/book_and_notes_vault">
+                        @gunnogere/book_and_notes_vault
+                    </a>
+                </p>
+
+                <p>
+                    Email:
+                    <a href="mailto:j.mulongo@alustudent.com">
+                        j.mulongo@alustudent.com
+                    </a>
+                </p>
+
+            </div>
+
+
+
+            <h2>Dashboard</h2>
+
+            <div class="stats-grid">
+
+                <article class="stat-card">
+                    <h3>Total Books</h3>
+                    <p id="total-books">0</p>
+                </article>
+
+                <article class="stat-card">
+                    <h3>Authors</h3>
+                    <p id="total-pages">0</p>
+                </article>  
+                </article>
+
+            </div>
+
+            <div class="trend-container">
+
+                <h3>Recently Added Books</h3>
+
+                <div
+                    id="trend-chart"
+                    class="trend-chart"
+                    aria-label="Books added over the last seven days">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+   
+
+<!-- FOOTER -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <p>
+            Book & Notes Vault © 2026
+        </p>
+
+    </div>
+
+</footer>
+
+<script type="module" src="scripts/app.js"></script>
+ 
+
+</body>
+</html>

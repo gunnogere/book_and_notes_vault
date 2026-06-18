@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book & Notes Vault</title>
+
+<link rel="stylesheet" href="styles/site.css">
+
+</head>
+<body>
+
+<!-- Skip Link -->
+<a class="skip-link" href="#main-content">
+    Skip to Main Content
+</a>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="container">
+
+        <a href="index.html" class="site-logo">
+            <img class="logo_image" src="assets/images/logo.jpg" alt="Logo">
+            <h1 class="logo-text">
+                Gunnogere University -  Book & Notes Vault
+            </h1>
+        </a>
+
+        <nav aria-label="Primary Navigation">
+            <ul class="nav-links">
+                <li><a href="index.html">About</a></li>                
+                <li><a href="index.html#dashboard">Dashboard</a></li>
+                <li><a href="records.html">Records</a></li>
+                <li><a href="add_book.html">Add Book</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle" aria-label="Toggle Dark Mode">🌓</button>
+
+    </div>
+</header>
+
+<!-- MAIN -->
+<main id="main-content">
+
+ 
+    <!-- FORM -->
+
+    <section
+        id="book-form-section"
+        class="section-card">
+
+        <div class="container">
+
+            <h2>Add / Edit Book</h2>
+
+            <form
+                id="book-form"
+                novalidate>
+
+                <input
+                    type="hidden"
+                    id="record-id">
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        required>
+
+                    <small
+                        class="error-message"
+                        id="title-error">
+                    </small>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="author">
+                        Author
+                    </label>
+
+                    <input
+                        type="text"
+                        id="author"
+                        required>
+
+                    <small
+                        class="error-message"
+                        id="author-error">
+                    </small>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="pages">
+                        Pages
+                    </label>
+
+                    <input
+                        type="number"
+                        id="pages"
+                        min="1"
+                        required>
+
+                    <small
+                        class="error-message"
+                        id="pages-error">
+                    </small>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="tag">
+                        Tag
+                    </label>
+
+                    <input
+                        type="text"
+                        id="tag"
+                        required>
+
+                    <small
+                        class="error-message"
+                        id="tag-error">
+                    </small>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="date-added">
+                        Date Added
+                    </label>
+
+                    <input
+                        type="date"
+                        id="date-added"
+                        required>
+
+                    <small
+                        class="error-message"
+                        id="date-error">
+                    </small>
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="save-btn">
+
+                    Save Book
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+ 
+
+</main>
+
+<!-- FOOTER -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <p>
+            Book & Notes Vault © 2026
+        </p>
+
+    </div>
+
+</footer>
+
+<script type="module" src="scripts/app.js"></script>
+ 
+
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book & Notes Vault</title>
+
+<link rel="stylesheet" href="styles/site.css">
+
+</head>
+<body>
+
+<!-- Skip Link -->
+<a class="skip-link" href="#main-content">
+    Skip to Main Content
+</a>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="container">
+
+        <a href="index.html" class="site-logo">
+            <img class="logo_image" src="assets/images/logo.jpg" alt="Logo">
+            <h1 class="logo-text">
+                Gunnogere University -  Book & Notes Vault
+            </h1>
+        </a>
+
+        <nav aria-label="Primary Navigation">
+            <ul class="nav-links">
+                <li><a href="index.html">About</a></li>                
+                <li><a href="index.html#dashboard">Dashboard</a></li>
+                <li><a href="records.html">Records</a></li>
+                <li><a href="add_book.html">Add Book</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle" aria-label="Toggle Dark Mode">🌓</button>
+
+    </div>
+</header>
+
+<!-- MAIN -->
+<main id="main-content">
+
+ 
+
+    <!-- RECORDS -->
+    <section id="records" class="section-card">
+
+        <div class="container">
+
+            <h2>Book Records</h2>
+
+            <!-- SEARCH -->
+
+            <div class="search-panel">
+
+                <div class="form-group">
+
+                    <label for="regex-search">
+                        Regex Search
+                    </label>
+
+                    <input
+                        type="text"
+                        id="regex-search"
+                        placeholder="Example: habit|code">
+
+                </div>
+
+                
+
+                <button
+                    type="button"
+                    id="clear-search-btn">
+
+                    Clear Search
+
+                </button>
+
+            </div>
+
+            <p
+                id="regex-feedback"
+                class="feedback-message"
+                aria-live="polite">
+            </p>
+
+            <!-- SORT -->
+
+            <div class="sort-panel">
+
+                <label for="sort-select">
+                    Sort By
+                </label>
+
+                <select id="sort-select">
+
+                    <option value="title-asc">
+                        Title A-Z
+                    </option>
+
+                    <option value="title-desc">
+                        Title Z-A
+                    </option>
+
+                    <option value="pages-asc">
+                        Pages Low-High
+                    </option>
+
+                    <option value="pages-desc">
+                        Pages High-Low
+                    </option>
+
+                    <option value="date-desc">
+                        Newest First
+                    </option>
+
+                    <option value="date-asc">
+                        Oldest First
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- EMPTY STATE -->
+
+            <div id="empty-state">
+
+                <p>
+                    No books have been added yet.
+                </p>
+
+            </div>
+
+            <!-- TABLE -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <caption class="sr-only">
+                        Stored book records
+                    </caption>
+
+                    <thead>
+
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Pages</th>
+                            <th>Tag</th>
+                            <th>Date Added</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="records-table-body">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- MOBILE CARDS -->
+
+            <div id="records-cards">
+            </div>
+
+        </div>
+
+    </section>
+
+    
+
+<!-- FOOTER -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <p>
+            Book & Notes Vault © 2026
+        </p>
+
+    </div>
+
+</footer>
+
+<script type="module" src="scripts/app.js"></script>
+ 
+
+</body>
+</html>
