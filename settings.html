@@ -39,30 +39,16 @@
 <!-- MAIN -->
 <main id="main-content">
     <!-- SETTINGS -->
+    <section id="message-container" aria-live="polite" style="margin-bottom: 20px;"></section>
+
     <section id="settings" class="section-card">
         <div class="container">
             <h2>Settings</h2>
-            <div class="settings-grid">
-                <article class="settings-card">
-                    <h3>Reading Goal</h3>
-                    <label for="page-goal">Target Pages</label>
-                    <input type="number" id="page-goal" min="0">
-                </article>
-
-                <article class="settings-card">
-                    <h3>Page Conversion</h3>
-                    <label for="minutes-per-page">Minutes Per Page</label>
-                    <input type="number" id="minutes-per-page" value="2" min="1">
-                </article>
-
-                <article class="settings-card">
-                    <h3>Import JSON</h3>
-                    <input type="file" id="import-file" accept=".json">
-                </article>
+            <div class="settings-grid"> 
 
                 <article class="settings-card">
                     <h3>Export JSON</h3>
-                    <button type="button" id="export-btn">Download JSON</button>
+                    <button type="button" id="settings-export-btn">Download All Records</button>
                 </article>
             </div>
         </div>
@@ -75,5 +61,6 @@
 </footer>
 
 <script type="module" src="scripts/app.js"></script>
+<script type="module" src="scripts/settings.js"></script>
 </body>
 </html>

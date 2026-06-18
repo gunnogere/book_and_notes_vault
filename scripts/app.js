@@ -1,4 +1,4 @@
-import { load } from './storage.js';
+import { load, loadSetting } from './storage.js';
 
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
@@ -42,10 +42,11 @@ export function showMessage(message, type = 'info', id) {
 
 /**
  * Initialize dashboard components by rendering stats and the latest 5 records.
+ * This function is now responsible for all dashboard-related rendering.
  */
 document.addEventListener('DOMContentLoaded', () => {
     const latestContainer = document.getElementById('latest_books');
-    if (!latestContainer) return;
+    if (!latestContainer) return; // Only run if on the dashboard page
 
     const books = load();
 
@@ -53,32 +54,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalBooksEl = document.getElementById('total-books');
     const totalAuthorsEl = document.getElementById('total-authors');
     const totalTagsEl = document.getElementById('total-tags');
+    const totalPagesReadEl = document.getElementById('total-pages-read'); // New element 
+    const readingGoalMessageEl = document.getElementById('reading-goal-message'); // New element
     
     if (totalBooksEl) totalBooksEl.textContent = books.length;
     if (totalAuthorsEl) {
         const uniqueAuthors = new Set(books.map(b => b.author?.trim()).filter(Boolean)).size;
         totalAuthorsEl.textContent = uniqueAuthors;
     }
+    if (totalPagesReadEl) {
+        const sumOfPages = books.reduce((sum, book) => sum + (parseInt(book.pages, 10) || 0), 0);
+        totalPagesReadEl.textContent = sumOfPages;
+    }
     if (totalTagsEl) {
         const allTags = books.flatMap(b => b.tag ? b.tag.split(',') : []);
         const uniqueTags = new Set(allTags.map(tag => tag.trim()).filter(Boolean)).size;
         totalTagsEl.textContent = uniqueTags;
     }
+ 
 
     // Display only the last 5 added or updated books (sorted by updatedAt descending)
     const latestFive = [...books].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).slice(0, 5);
 
     latestContainer.innerHTML = latestFive.length > 0
         ? latestFive.map(b => {
-            const tagsHtml = b.tag ? b.tag.split(',').map(tag => `<span class="tag-badge">${tag.trim()}</span>`).join(' ') : '';
+            const tagsHtml = b.tag ? b.tag.split(',').map(tag => `<span class="tag-badge">${tag.trim()}</span>`).join('') : '';
             const formattedDate = b.dateAdded ? new Date(b.dateAdded).toLocaleDateString() : 'N/A';
             return `
             <div class="stat-card" style="margin-bottom: 10px; border-left-color: var(--primary); display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
                 <strong>${b.title}</strong>
                 <small style="color:var(--muted)">by ${b.author}</small>
                 <small style="color:var(--muted)">• ${formattedDate}</small>
-                <div class="tags-container" style="margin-top: 0; margin-left: auto;">${tagsHtml}</div>
+                <div class="tags-container" style="margin-top: 0; margin-left: auto; display: flex; gap: 5px;">${tagsHtml}</div>
             </div>`;
         }).join('')
         : '<p>No books added yet.</p>';
+ 
+ 
 });

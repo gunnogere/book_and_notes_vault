@@ -13,10 +13,41 @@ const KEY = 'app:data';
 export const load = () => JSON.parse(localStorage.getItem(KEY) || '[]');
 
 /**
+ * Loads a specific setting from localStorage.
+ * @param {string} settingKey - The key for the setting.
+ * @param {*} defaultValue - The default value if the setting is not found.
+ * @returns {*} The setting value or default.
+ */
+export const loadSetting = (settingKey, defaultValue) => {
+    const value = localStorage.getItem(`app:settings:${settingKey}`);
+    return value !== null ? JSON.parse(value) : defaultValue;
+};
+
+/**
+ * Saves a specific setting to localStorage.
+ * @param {string} settingKey - The key for the setting.
+ * @param {*} value - The value to save.
+ */
+export const saveSetting = (settingKey, value) => localStorage.setItem(`app:settings:${settingKey}`, JSON.stringify(value));
+
+/**
  * Serializes and writes data to localStorage.
  * @param {Array} data - The complete updated array of books.
  */
 export const save = data => localStorage.setItem(KEY, JSON.stringify(data));
+
+/**
+ * Deletes a record from localStorage by its ID.
+ * @param {string} id - The ID of the record to delete.
+ * @returns {boolean} True if the record was found and deleted, false otherwise.
+ */
+export const deleteRecord = (id) => {
+    let books = load();
+    const initialLength = books.length;
+    books = books.filter(book => book.id !== id);
+    save(books);
+    return books.length < initialLength; // Returns true if a record was removed
+};
 
 /**
  * Business logic wrapper to handle id assignment and appending records.
@@ -69,6 +100,7 @@ export const addInitialBookRecord = (bookData) => {
         pages: parseInt(bookData.pages, 10),
         tag: bookData.tag,
         dateAdded: bookData.dateAdded,
+        createdAt: new Date().toISOString(), // Add createdAt for new records
         updatedAt: new Date().toISOString()
     };
 

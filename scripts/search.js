@@ -1,5 +1,6 @@
 
-import { load } from './storage.js';
+import { load, deleteRecord } from './storage.js';
+import { showMessage } from './app.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const tableBody = document.getElementById('records-table-body');
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${book.dateAdded}</td>
                 <td>
                     <button class="btn-small" onclick="window.location.href='add_book.html?edit=${book.id}'">Edit</button>
+                    <button class="btn-small btn-delete" data-id="${book.id}">Delete</button>
                 </td>
             `;
             tableBody.appendChild(tr);
@@ -84,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><small>Added: ${book.dateAdded}</small></p>
                 <div class="record-actions">
                     <button onclick="window.location.href='add_book.html?edit=${book.id}'">Edit</button>
+                    <button class="btn-delete" data-id="${book.id}">Delete</button>
                 </div>
             `;
             cardsContainer.appendChild(card);
@@ -139,6 +142,30 @@ document.addEventListener('DOMContentLoaded', () => {
             feedback.textContent = 'Invalid Regular Expression';
         }
     };
+
+    /**
+     * Handles the deletion of a record.
+     * @param {string} id - The ID of the book to delete.
+     */
+    const handleDelete = (id) => {
+        if (confirm('Are you sure you want to delete this book record?')) {
+            deleteRecord(id);
+            allRecords = load(); // Reload all records after deletion
+            // Re-apply current search and sort to update UI
+            handleSearch(); // This will re-filter and re-render
+            showMessage('Book record deleted successfully!', 'success', 'message-container');
+        } else {
+            showMessage('Deletion cancelled.', 'info', 'message-container');
+        }
+    };
+
+    // Delegate delete events
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-delete')) {
+            const id = e.target.dataset.id;
+            if (id) handleDelete(id);
+        }
+    });
 
     /**
      * Exports only the fliters results as a JSON file downloaded to the user's device

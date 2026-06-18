@@ -1,4 +1,4 @@
-# 📚 Joshua's Book & Notes Vault
+# Joshua's Book & Notes Vault
 
 **Author:** Joshua Mulongo
 **GitHub:** https://github.com/gunnogere/book_and_notes_vault
@@ -6,11 +6,11 @@
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 Joshua's Book & Notes Vault is a privacy-focused, modular personal library manager designed to help users organize books, notes, and reading progress in a distraction-free environment.
 
-Built with a mobile-first philosophy, the application emphasizes simplicity, accessibility, and performance while maintaining a clean and responsive user experience.
+Built with a mobile-first philosophy, the application emphasizes simplicity, accessibility, and performance while maintaining a clean and responsive user experience. 
 
 ### 🛠 Technology Stack
 
@@ -24,7 +24,7 @@ Built with a mobile-first philosophy, the application emphasizes simplicity, acc
 
 ---
 
-## 📁 Directory Structure
+## Directory Structure
 
 ```text
 .
@@ -52,7 +52,7 @@ Built with a mobile-first philosophy, the application emphasizes simplicity, acc
 
 ---
 
-## 🏁 Getting Started
+## Getting Started
 
 ### Clone the Repository
 
@@ -72,58 +72,56 @@ index.html
 
 in any modern browser.
 
-### No Installation Required
+### No Packages Required
 
 ```text
-npm install ❌
-build step ❌
-framework setup ❌
+The webs application is built on pure HTML, CSS, and JavaScript and it should run in all modern browsers. IN case your expereince issues when trying to run it will require you to run it in a server environment like Apache, Nginx to properly import the .js file. 
 ```
 
 ---
 
-## 🎨 Core Features
+## Core Features
 
-### 📖 Library Management
+### Library Management
 
 * Add new books and notes
 * Edit existing records
 * Automatically update duplicate entries
 * Track reading progress
 
-### 🔍 Regex-Powered Search
+###  Regex-Powered Search
 
 * Advanced searching using regular expressions
 * Real-time result filtering
 * Match highlighting
 * Safe regex compilation
 
-### 💾 Persistent Storage
+###  Persistent Storage
 
 * LocalStorage-based data persistence
 * Automatic state saving
 * Theme preference persistence
 
-### 🌗 Theme Engine
+###  Theme Engine
 
 * Light Mode
 * Dark Mode
 * Persistent theme memory
 
-### 📱 Responsive Experience
+###  Responsive Experience
 
 * Mobile-first design
 * Desktop table view
 * Mobile card view
 * Adaptive layouts across devices
 
-### 📂 Import & Export
+###  Import & Export
 
 * JSON-based bulk import
 * Data export support
 * Record synchronization
 
-### 📊 Dashboard Analytics
+###  Dashboard Analytics
 
 * Total books
 * Author statistics
@@ -144,7 +142,7 @@ framework setup ❌
 
 ---
 
-## ⌨️ Accessibility Features
+##  Accessibility Features
 
 The application follows accessibility-first principles.
 
@@ -176,7 +174,7 @@ The application follows accessibility-first principles.
 
 ---
 
-## 📊 Data Model
+##  Data Model
 
 Example application record:
 
@@ -208,9 +206,9 @@ export const save = (data) =>
 
 ---
 
-## 🗺️ Application Pages
+##  Application Pages
 
-### 🏠 Dashboard (`index.html`)
+###  Dashboard and ABout Us (`index.html`)
 
 Displays:
 
@@ -226,15 +224,14 @@ Provides:
 * Validation engine
 * Bulk import functionality
 
-### 📚 Records (`records.html`)
-
+###  Records (`records.html`)
 Provides:
 
 * Search interface
 * Sorting functionality
 * Record management
 
-### ⚙️ Settings (`settings.html`)
+###  Settings (`settings.html`)
 
 Provides:
 
@@ -242,7 +239,7 @@ Provides:
 * Application preferences
 * Storage controls
 
-### 🧪 Tests (`tests.html`)
+###  Tests (`tests.html`)
 
 Provides:
 
@@ -253,7 +250,7 @@ Provides:
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 The project includes an integrated testing suite.
 
@@ -272,7 +269,7 @@ The suite validates:
 
 ---
 
-## 📖 Project Documentation
+##  Project Documentation
 
 Additional project planning documents are available in:
 
@@ -289,7 +286,7 @@ Including:
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 The project includes an integrated testing suite.
 
@@ -306,7 +303,7 @@ The suite validates:
 - LocalStorage functionality
 - Data processing logic
 
-### ♿ Accessibility (A11Y) Testing Results
+### Accessibility (A11Y) Testing Results
 
 The application was manually tested against core accessibility requirements to ensure an inclusive user experience.
 
@@ -330,7 +327,7 @@ The application was manually tested against core accessibility requirements to e
 
 ---
 
-## 🤖 AI Assistance & Attribution
+## AI Assistance & Attribution
 
 This project was designed, developed, and submitted by **Joshua Mulongo**.
 
@@ -359,7 +356,7 @@ The use of AI tools does not diminish the author's ownership of the project, its
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Joshua Mulongo**
 

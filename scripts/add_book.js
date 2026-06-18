@@ -138,7 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             showMessage(statusMsg, 'success', 'message-container');
             form.reset();
-            if (fields.id) fields.id.value = '';
+            if (fields.id) fields.id.value = ''; 
+            // Redirect to records.html after a short delay on successful update
+            if (wasUpdated) {
+                setTimeout(() => window.location.href = 'records.html', 2000);
+            }
         } catch (error) {
             // Fail-safe handling
             showMessage('Failure: An error occurred while trying to save the book.', 'error', 'message-container');
@@ -179,5 +183,5 @@ document.addEventListener('DOMContentLoaded', () => {
             importInput.value = ''; // Reset input to allow re-uploading same file
         };
         reader.readAsText(file);
-    });
+    }); 
 });
