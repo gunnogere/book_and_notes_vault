@@ -1,234 +1,281 @@
+
 /**
  * add_book.js
- * Summary: UI Controller for the Add Book form, containing frontend validation and storage invocation.
- * Updated: 2026-06-18
+ * logic for addding a book (one-by-one and bulk import from json file)
  */
 
-// CRITICAL: Import the storage function from your module file
+// Import functions from other files
 import { addInitialBookRecord, load } from './storage.js';
 import { showMessage } from './app.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+// Wait for the window to load completely before running the code
+document.addEventListener('DOMContentLoaded', function () {
+    
+    // Getting form elements from HTML by their IDs
     const form = document.getElementById('book-form');
     const importInput = document.getElementById('import-json');
-    const bulkProcessBtn = document.getElementById('bulk-process-btn');
+    const bulkImportButton = document.getElementById('bulk-process-btn');
     
-    // Tab Switching Logic
+    // TAB SWITCHING LOGIC FOR THE PAGES
     const tabs = document.querySelectorAll('.tab-btn');
     const panes = document.querySelectorAll('.tab-pane');
 
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const target = tab.dataset.tab;
+    // Loop through all tabs to add click listeners
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].addEventListener('click', function () {
+            const target = tabs[i].dataset.tab;
             
-            // Update buttons
-            tabs.forEach(t => {
-                t.classList.remove('active');
-                t.style.borderBottom = 'none';
-                t.style.fontWeight = 'normal';
-                t.style.color = 'var(--muted)';
-            });
-            tab.classList.add('active');
-            tab.style.borderBottom = '2px solid var(--primary)';
-            tab.style.fontWeight = 'bold';
-            tab.style.color = 'var(--text)';
+            // Loop again to reset all buttons back to normal styling
+            for (let j = 0; j < tabs.length; j++) {
+                tabs[j].classList.remove('active');
+                tabs[j].style.borderBottom = 'none';
+                tabs[j].style.fontWeight = 'normal';
+                tabs[j].style.color = 'var(--muted)';
+            }
+            
+            // Apply styles to the one clicked
+            tabs[i].classList.add('active');
+            tabs[i].style.borderBottom = '2px solid var(--primary)';
+            tabs[i].style.fontWeight = 'bold';
+            tabs[i].style.color = 'var(--text)';
 
-            // Update panes
-            panes.forEach(p => p.style.display = 'none');
-            document.getElementById(`${target}-pane`).style.display = 'block';
+            // Hide all the panes first
+            for (let k = 0; k < panes.length; k++) {
+                panes[k].style.display = 'none';
+            }
+            // Show the current active pane
+            document.getElementById(target + '-pane').style.display = 'block';
         });
-    });
+    }
     
-    // Form Input Elements
-    const fields = {
-        id: document.getElementById('record-id'),
-        title: document.getElementById('title'),
-        author: document.getElementById('author'),
-        pages: document.getElementById('pages'),
-        tag: document.getElementById('tag'),
-        dateAdded: document.getElementById('date-added')
-    };
+    // Getting input elements individually because it is simpler to understand
+    const idInput = document.getElementById('record-id');
+    const titleInput = document.getElementById('title');
+    const authorInput = document.getElementById('author');
+    const pagesInput = document.getElementById('pages');
+    const tagInput = document.getElementById('tag');
+    const dateAddedInput = document.getElementById('date-added');
 
-    // Validation Regex Patterns
-    const patterns = {
-        text: /^\S(?:.*\S)?$/, // Forbid leading/trailing spaces & collapse doubles
-        numeric: /^(0|[1-9]\d*)(\.\d{1,2})?$/, // Match positive integers/decimals
-        date: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, // YYYY-MM-DD
-        tag: /^[A-Za-z-]+(?:,[A-Za-z-]+)*$/, // Letters, hyphens, comma-separated (no spaces)
-        duplicateCheck: /\b(\w+)\s+\1\b/i // Advanced look: Catch duplicate words (case-insensitive)
-    };
+    // Regex verification patterns copied from assignment instructions
+    const textPattern = /^\S(?:.*\S)?$/; // no space at start/end
+    const numericPattern = /^(0|[1-9]\d*)(\.\d{1,2})?$/; // numbers only
+    const datePattern = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/; // YYYY-MM-DD
+    const tagPattern = /^[A-Za-z-]+(?:,[A-Za-z-]+)*$/; // tags separated by comma
+    const duplicateWordPattern = /\b(\w+)\s+\1\b/i; // checks if word repeated twice
 
-    // Handle Edit Mode from URL Parameters
+    // URL parameter reading for editing existing books
     const urlParams = new URLSearchParams(window.location.search);
     const editId = urlParams.get('edit');
 
-    const loadBookForEditing = () => {
-        if (!editId) return;
+    // Function to load the book data into inputs if we are in edit mode
+    function loadBookForEditing() {
+        if (editId === null || editId === '') {
+            return; // stop here if we are not editing
+        }
         
-        const books = load();
-        const bookToEdit = books.find(b => b.id === editId);
+        const books = load(); // load array list from storage.js
+        let bookToEdit = null;
 
-        if (bookToEdit) {
-            fields.id.value = bookToEdit.id;
-            fields.title.value = bookToEdit.title;
-            fields.author.value = bookToEdit.author;
-            fields.pages.value = bookToEdit.pages;
-            fields.tag.value = bookToEdit.tag;
-            fields.dateAdded.value = bookToEdit.dateAdded;
+        // Simple loop to find the book that matches our edit ID
+        for (let i = 0; i < books.length; i++) {
+            if (books[i].id === editId) {
+                bookToEdit = books[i];
+                break; // found it, stop looping
+            }
+        }
 
-            // Update UI for Edit Mode
+        // Put the data back into the form fields
+        if (bookToEdit !== null) {
+            idInput.value = bookToEdit.id;
+            titleInput.value = bookToEdit.title;
+            authorInput.value = bookToEdit.author;
+            pagesInput.value = bookToEdit.pages;
+            tagInput.value = bookToEdit.tag;
+            dateAddedInput.value = bookToEdit.dateAdded;
+
+            // Change form titles to show we are editing
             document.querySelector('h2').textContent = 'Edit Book';
             document.getElementById('save-btn').textContent = 'Update Book';
         }
-    };
+    }
 
+    // Call the edit function immediately
     loadBookForEditing();
 
-    // Re-check for edit data if it was seeded after the script ran
-    window.addEventListener('data-seeded', () => {
-        if (editId && !fields.id.value) {
+    // Event listener for data seeding updates
+    window.addEventListener('data-seeded', function () {
+        if (editId && !idInput.value) {
             loadBookForEditing();
         }
     });
 
-    // Error message helpers
-    const clearErrors = () => {
-        document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-    };
+    // Function to clear all error text messages
+    function clearErrors() {
+        const errorElements = document.querySelectorAll('.error-message');
+        for (let i = 0; i < errorElements.length; i++) {
+            errorElements[i].textContent = '';
+        }
+    }
 
-    const setError = (fieldId, message) => {
-        document.getElementById(`${fieldId}-error`).textContent = message;
-    };
+    // Function to set error message on a specific element
+    function setError(fieldId, message) {
+        const errorElement = document.getElementById(fieldId + '-error');
+        errorElement.textContent = message;
+    }
 
-    /**
-     * Runs schema and rule validation on form fields.
-     * @returns {boolean} True if the form is fully valid.
-     */
-    const validateForm = () => {
+    // Validation function to check all inputs are correct before sending
+    function validateForm() {
         clearErrors();
         let isValid = true;
 
-        // 1. Validate Title
-        const titleVal = fields.title.value.trim();
-        if (!patterns.text.test(titleVal)) {
+        // 1. Check Title
+        const titleVal = titleInput.value.trim();
+        if (textPattern.test(titleVal) === false) {
             setError('title', 'Title cannot be empty or have leading/trailing spaces. Example: "Atomic Habits".');
             isValid = false;
-        } else if (patterns.duplicateCheck.test(titleVal)) {
+        } else if (duplicateWordPattern.test(titleVal) === true) {
             setError('title', 'Title contains consecutive duplicate words. Expected distinct words (e.g., avoid "The The").');
             isValid = false;
         }
 
-        // 2. Validate Author
-        const authorVal = fields.author.value.trim();
-        if (!patterns.text.test(authorVal)) {
+        // 2. Check Author
+        const authorVal = authorInput.value.trim();
+        if (textPattern.test(authorVal) === false) {
             setError('author', 'Author name is invalid. Expected format: "James Clear".');
             isValid = false;
         }
 
-        // 3. Validate Pages
-        if (!patterns.numeric.test(fields.pages.value)) {
+        // 3. Check Pages
+        if (numericPattern.test(pagesInput.value) === false) {
             setError('pages', 'Please enter a valid number of pages. Expected: positive integer (e.g., 320).');
             isValid = false;
         }
 
-        // 4. Validate Tag
-        if (!patterns.tag.test(fields.tag.value.trim())) {
+        // 4. Check Tag
+        if (tagPattern.test(tagInput.value.trim()) === false) {
             setError('tag', 'Tags must be letters or hyphens, separated by commas without spaces. Example: "Self-Help,Habits".');
             isValid = false;
         }
 
-        // 5. Validate Date
-        if (!patterns.date.test(fields.dateAdded.value)) {
+        // 5. Check Date
+        if (datePattern.test(dateAddedInput.value) === false) {
             setError('date', 'Please choose a valid date. Expected format: YYYY-MM-DD (e.g., 2026-06-18).');
             isValid = false;
         }
 
-        return isValid;
-    };
+        return isValid; // returns true if everything passed
+    }
 
-    // Handle Form Submit Event
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    // When the user clicks Save Book button
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Stop form from refreshing the web page
 
-        if (!validateForm()) {
+        // If validation fails, show error message container and stop
+        if (validateForm() === false) {
             showMessage('Please fix the errors in the form before saving.', 'error', 'message-container');
             return;
         }
 
-        // Gather clean payload
+        // Creating the payload data object manually
+        let finalRecordId = null;
+        if (idInput.value !== '') {
+            finalRecordId = idInput.value;
+        }
+
         const bookPayload = {
-            id: fields.id.value || null,
-            title: fields.title.value.trim(),
-            author: fields.author.value.trim(),
-            pages: fields.pages.value,
-            tag: fields.tag.value.trim(),
-            dateAdded: fields.dateAdded.value
+            id: finalRecordId,
+            title: titleInput.value.trim(),
+            author: authorInput.value.trim(),
+            pages: pagesInput.value,
+            tag: tagInput.value.trim(),
+            dateAdded: dateAddedInput.value
         };
 
         try {
-            // FIX: Use the imported function name from your guidelines wrapper
-            const { record, wasUpdated } = addInitialBookRecord(bookPayload);
+            // Save using our storage function module
+            const result = addInitialBookRecord(bookPayload);
+            const record = result.record;
+            const wasUpdated = result.wasUpdated;
             
-            // Provide specific status message based on whether it was an update or addition
-            const statusMsg = wasUpdated 
-                ? `Updated existing record: "${record.title}".` 
-                : `"${record.title}" successfully added to your library!`;
+            // Check if it updated or added fresh
+            let statusMsg = '';
+            if (wasUpdated === true) {
+                statusMsg = 'Updated existing record: "' + record.title + '".';
+            } else {
+                statusMsg = '"' + record.title + '" successfully added to your library!';
+            }
 
             showMessage(statusMsg, 'success', 'message-container');
-            form.reset();
-            if (fields.id) fields.id.value = ''; 
-            // Redirect to records.html after a short delay on successful update
-            if (wasUpdated) {
-                setTimeout(() => window.location.href = 'records.html', 2000);
+            form.reset(); // clear fields
+            
+            if (idInput) {
+                idInput.value = ''; 
+            }
+            
+            // If it updated, send user to records list after 2 seconds
+            if (wasUpdated === true) {
+                setTimeout(function () {
+                    window.location.href = 'records.html';
+                }, 2000);
             }
         } catch (error) {
-            // Fail-safe handling
+            // Catching system error if saving crashes
             showMessage('Failure: An error occurred while trying to save the book.', 'error', 'message-container');
         }
     });
 
-    /**
-     * Processes the selected file for bulk import.
-     */
-    const processBulkFile = (file) => {
+    // Bulk JSON Import Function block
+    function processBulkFile(file) {
         if (!file) {
             showMessage('Please select a JSON file first.', 'info', 'message-container');
             return;
         }
 
-        if (!file.name.toLowerCase().endsWith('.json')) {
+        // Check if file extension is actually .json
+        if (file.name.toLowerCase().endsWith('.json') === false) {
             showMessage('Invalid file type. Only .json files are allowed.', 'error', 'message-container');
             importInput.value = '';
             return;
         }
 
         const reader = new FileReader();
-        reader.onload = (event) => {
+        reader.onload = function (event) {
             try {
                 const data = JSON.parse(event.target.result);
-                const booksArray = Array.isArray(data) ? data : [data];
+                
+                // If it is not an array, turn it into an array list of one item
+                let booksArray = [];
+                if (Array.isArray(data) === true) {
+                    booksArray = data;
+                } else {
+                    booksArray.push(data);
+                }
                 
                 let added = 0;
                 let updated = 0;
 
-                booksArray.forEach(book => {
-                    const result = addInitialBookRecord(book);
-                    if (result.wasUpdated) updated++;
-                    else added++;
-                });
+                // Loop through the imported items to pass to storage
+                for (let i = 0; i < booksArray.length; i++) {
+                    const result = addInitialBookRecord(booksArray[i]);
+                    if (result.wasUpdated === true) {
+                        updated = updated + 1;
+                    } else {
+                        added = added + 1;
+                    }
+                }
 
-                showMessage(`Import successful: ${added} added, ${updated} updated.`, 'success', 'message-container');
+                showMessage('Import successful: ' + added + ' added, ' + updated + ' updated.', 'success', 'message-container');
             } catch (err) {
                 showMessage('Failed to parse JSON. Ensure the file format is correct.', 'error', 'message-container');
             }
-            importInput.value = ''; // Reset input to allow re-uploading same file
+            importInput.value = ''; // Reset file input
         };
         reader.readAsText(file);
-    };
+    }
 
-    // Handle Bulk Import Button Click
-    if (bulkProcessBtn) {
-        bulkProcessBtn.addEventListener('click', () => {
+    // Trigger file reading when bulk upload button clicked
+    if (bulkImportButton) {
+        bulkImportButton.addEventListener('click', function () {
             processBulkFile(importInput.files[0]);
         });
     }

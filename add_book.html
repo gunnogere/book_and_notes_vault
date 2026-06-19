@@ -7,12 +7,10 @@
     <link rel="stylesheet" href="styles/site.css">
 </head>
 <body>
-
-<a class="skip-link" href="#main-content">
+<a class="skip-link" href="#main-page-content-area">
     Skip to Main Content
 </a>
-
-<!-- HEADER -->
+  
 <header class="site-header">
     <div class="container">
         <a href="index.html" class="site-logo">
@@ -35,22 +33,19 @@
 
     </div>
 </header>
-
-<!-- MAIN -->
-<main id="main-content">
-    <!-- FORM -->
+ 
+<main id="main-page-content-area">  
     <section id="book-form-section" class="section-card">
-        <div class="container">
-            <!-- Accessible container for status messages -->
+        <div class="container"> 
             <div id="message-container" aria-live="polite"></div>
 
-            <!-- TABS NAVIGATION -->
+            <!-- Tabs -->
             <div class="tabs-nav" style="display: flex; gap: 10px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
                 <button type="button" class="tab-btn active" data-tab="single" style="background: none; border: none; padding: 10px 20px; cursor: pointer; border-bottom: 2px solid var(--primary); font-weight: bold; color: var(--text);">Enter SIngle Record</button>
                 <button type="button" class="tab-btn" data-tab="bulk" style="background: none; border: none; padding: 10px 20px; cursor: pointer; color: var(--muted);">Bulk Upload / Update</button>
             </div>
 
-            <!-- SINGLE ENTRY PANE -->
+            <!-- manual entry for one-by-one -->
             <div id="single-pane" class="tab-pane">
                 <h2>Add Book</h2>
                 <form id="book-form" novalidate>
@@ -92,7 +87,7 @@
                 </form>
             </div>
 
-            <!-- BULK UPLOAD PANE -->
+            <!-- bulk upload from json file-->
             <div id="bulk-pane" class="tab-pane" style="display: none;">
                 <div class="import-section" style="border: 2px solid var(--border); padding: 30px; border-radius: 8px; background: var(--card-bg);">
                     <h3>Bulk Management</h3>
@@ -109,8 +104,7 @@
         </div>
     </section>
 </main>
-
-<!-- FOOTER -->
+  
 <footer class="site-footer">
     <div class="container">
         <p>Book & Notes Vault © 2026</p>

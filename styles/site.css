@@ -1,4 +1,18 @@
  
+ /*
+ css for the platform 
+ 
+ 
+ i use javascript variables to delcare the colors that i will use accross the the site
+ this way i avoid repating the same color multiple times
+
+ to use the variable, i use the syntax var(--variable-name)
+
+ Lessons picked from the shared materials on canvas on MDN. 
+ https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties
+
+ */
+
 :root {
 --bg: #f8f6f1;
 --surface: #ffffff;
@@ -16,7 +30,13 @@
 --card-bg: #fafafa;
 }
 
-body.dark-mode {
+/*i define what the dark theme should look like, this is activated by javascript
+the defaukt theme is light mode
+if a user changes the preference, i store their preference in local storage and load it on the next visit
+unless they change it again, it will remain in the same mode when they last visited 
+*/
+
+body.dark-mode { 
     --bg: #0f172a;
     --surface: #1e293b;
     --primary: #38bdf8;
@@ -26,13 +46,9 @@ body.dark-mode {
     --table-header: #1e293b;
     --card-bg: #1e293b;
 }
- 
 
-html {
-scroll-behavior: smooth;
-}
-
-body {
+/*setting global css parameters*/
+body { 
 margin: 0;
 font-family:  Arial,     Helvetica,     sans-serif;
 background: var(--bg);
@@ -40,32 +56,10 @@ color: var(--text);    transition: background var(--transition), color var(--tra
 line-height: 1.6;
 }
 
-#main-content {
+#main-page-content-area {
     margin: 32px 0;
 }
-
-/* accessibility */
-
-.skip-link {
-position: absolute;
-left: -999px;
-top: 0;
-background: var(--primary);
-color: white;
-padding: 12px 16px;
-z-index: 1000;
-
-}
-
-.skip-link:focus {
-left: 16px;
-}
-
-:focus-visible {
-outline: 3px solid var(--secondary);
-outline-offset: 2px;
-}
-
+ 
 .sr-only {
 position: absolute;
 width: 1px;
@@ -75,23 +69,15 @@ clip: rect(0, 0, 0, 0);
 
 }
 
-/* typography */
-
-h1,
-h2,
-h3 {
+/* setting css for typography of header tags */
+h1,h2, h3 {
 font-family: Georgia,"Times New Roman", serif;
-color: var(--primary);
-}
-
-h2 {
-margin-top: 0;
-}
+color: var(--primary);margin-top: 0;
+} 
 
 /* layout */
-
 .container {
-width: min(1100px, 92%);
+width: min(1100px, 92%); /* for responsive design: shrink upto 92% for smaller devices */
 margin-inline: auto;
 }
 
@@ -105,7 +91,6 @@ box-shadow: var(--shadow);
 }
 
 /* header */
-
 .site-header {
 background: var(--primary);
 color: white;
@@ -186,10 +171,7 @@ gap: 1.6px;
     border-radius: 50%;
 }
 
-/* =========================
-DASHBOARD
-========================= */
-
+/* the dashboard css  */
 .stats-grid {
 display: flex;
 flex-direction: column;
@@ -240,18 +222,15 @@ padding: 16px;
 }
 
 /* search and sort*/
-
 .search-panel,.sort-panel {
 margin-bottom: 16px;
 }
-
 .feedback-message {
 color: var(--error);
 font-weight: bold;
 }
 
 /* form */
-
 .form-group {
 margin-bottom: 16px;
 }
@@ -380,7 +359,7 @@ color: var(--muted);
 
 }
 
-/* footer */
+/* footer OF THE Page*/
 
 .site-footer {
 text-align: center;
@@ -388,7 +367,7 @@ padding: 32px 16px;
 color: var(--muted);
 }
 
-/*search*/
+/*search area in the records page*/
 #regex-search {
     width: 90%;
 }
@@ -397,8 +376,10 @@ color: var(--muted);
     color: white;
 }
 
-/* Mobile Phone responsivness*/
 
+/*Media Queries for responsive design  */
+
+/* Mobile Phone responsivness*/
 @media (min-width: 360px) {
     .nav-links {
         gap: 8px;
@@ -415,11 +396,9 @@ color: var(--muted);
         display: grid;
         grid-template-columns: repeat(3, 1fr);
     }
-
     .settings-grid {
         grid-template-columns: repeat(3, 1fr);
     }
-
     .search-panel {
         display: flex;
         gap: 1rem;
@@ -427,7 +406,7 @@ color: var(--muted);
     }
 
     .search-panel .form-group {
-        flex: 1;
+        flex: 1; 
     }
 
     .search-panel button {
@@ -449,4 +428,3 @@ color: var(--muted);
         display: block;
     }
 }
-

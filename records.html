@@ -7,13 +7,9 @@
     <link rel="stylesheet" href="styles/site.css">
 </head>
 <body>
-
-<!-- Skip Link -->
-<a class="skip-link" href="#main-content">
+<a class="skip-link" href="#main-page-content-area">
     Skip to Main Content
 </a>
-
-<!-- HEADER -->
 <header class="site-header">
     <div class="container">
         <a href="index.html" class="site-logo">
@@ -35,18 +31,16 @@
         <button id="theme-toggle" aria-label="Toggle Dark Mode">🌓</button>
     </div>
 </header>
-
-<!-- MAIN -->
-<main id="main-content">
+ 
+<main id="main-page-content-area">
     <section id="records" class="section-card">
         <div class="container">
             <a href="add_book.html" class="button" style="margin-bottom: 20px; display: inline-block;">Add New Book</a>
             <h2>Book Records</h2>
-
-            <!-- SEARCH -->
+ 
             <div class="search-panel" role="search">
                 <div class="form-group">
-                    <label for="regex-search">Regex Search</label>
+                    <label for="regex-search">Search Books (Powered By Regex)</label>
                     <input type="text" id="regex-search" placeholder="Search by title or author" aria-describedby="regex-feedback">
                 </div>
                 <button type="button" id="search-btn">Search</button>
@@ -54,8 +48,7 @@
                 <button type="button" id="export-results-btn">Export Search Results</button> 
             </div>
             <p id="regex-feedback" class="feedback-message" aria-live="polite"></p>
-
-            <!-- SORT -->
+ 
             <div class="sort-panel">
                 <div class="form-group">
                     <label for="sort-select">Sort By</label>
@@ -63,19 +56,15 @@
                         <option value="title-asc">Title A-Z</option>
                         <option value="title-desc">Title Z-A</option>
                         <option value="pages-asc">Pages Low-High</option>
-                        <option value="pages-desc">Pages High-Low</option>
-                        <option value="date-desc">Newest First</option>
-                        <option value="date-asc">Oldest First</option>
+                        <option value="pages-desc">Pages High-Low</option>  
                     </select>
                 </div>
             </div>
-
-            <!-- EMPTY STATE -->
+ 
             <div id="empty-state">
                 <p>No books have been added yet.</p>
             </div>
-
-            <!-- TABLE -->
+ 
             <div class="table-wrapper">
                 <table>
                     <caption class="sr-only">Stored book records</caption>
@@ -105,6 +94,6 @@
 </footer>
 
 <script type="module" src="scripts/app.js"></script>
-<script type="module" src="scripts/search.js"></script>
+<script type="module" src="scripts/records.js"></script>
 </body>
 </html>
